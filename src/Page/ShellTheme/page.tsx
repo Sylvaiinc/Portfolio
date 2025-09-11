@@ -1,69 +1,59 @@
-import { useEffect, useRef, useState } from "react";
-import Icon from "../../components/icon";
+import {
+	useEffect,
+	useRef,
+	useState,
+} from "react"
+import PowerShell from "./components/powerShell"
+import { useShellContext } from "./providers/shellProvider"
 
+// todo contours tube catodic
 export default function ShellTheme() {
-	const text = "user@webSite: ~$"
-	const [displayedText, setDisplayedText] = useState("")
-  const [value, setValue] = useState("");
-  const spanRef = useRef<HTMLSpanElement>(null);
-  const [width, setWidth] = useState(1); // largeur min 1px
-
-  useEffect(() => {
-
-    if (spanRef.current) {
-      const newWidth = spanRef.current.offsetWidth + 2; // petit padding
-      setWidth(newWidth < 1 ? 1 : newWidth);
-    }
-  }, [value]);
+  const [value, setValue] = useState("")
+  const [command, setCommand] = useState<string>("")
+	const [inputWidth, setInputWidth] = useState(0)
+  const spanRef = useRef<HTMLSpanElement>(null)
+	const inputRef = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
-		let i = 0;
-		const interval = setInterval(() => {
-			setDisplayedText((prev) => prev + text[i]);
-			i++;
-			if (i >= text.length) clearInterval(interval);
-		}, 100); // vitesse d’écriture (100ms par caractère)
-		return () => clearInterval(interval);
-	}, []);
+    if (spanRef.current) {
+      setInputWidth(spanRef.current.offsetWidth + 2)
+    }
+  }, [value])
 
-	return (
-		<main className="flex flex-col w-full min-h-screen text-green-400 font-mono">
-			<section className="m-5">
-				<span>{displayedText}</span>
-				<span className="animate-ping"></span> {/* curseur qui clignote */}
-			</section>
-			<section className="flex w-full">
-				<Icon type="square"/>
-				<input
-					type="text"
-					value={value}
-					onChange={(e) => setValue(e.target.value)}
-					style={{ width: `${width}px` }}
-					className="border border-gray-400 focus:outline-none"
-				/>
+	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter" && inputRef.current) {
+			setCommand(inputRef.current.value)
+			inputRef.current.value = ""
+		}
+	}
 
-				{/* élément invisible servant à mesurer le texte */}
-				<span
-					ref={spanRef}
-					className="absolute invisible whitespace-pre font-mono text-base"
-				>
-					{value || ""}
-				</span>
-			</section>
-		</main>
-	);
+	const { fullPrompt, processUsed } = useShellContext()
 
-
-	return <main className="flex flex-col p-5">
-		<section className="flex">
-			<span>user@webSite: ~$</span>
+	return <main
+		className="flex flex-col w-full overflow-hidden min-h-screen text-green-400 font-mono p-5"
+		onClick={() => inputRef.current?.focus()}
+	>
+		<section className="flex flex-col leading-none whitespace-pre font-mono">
+			<PowerShell
+				command={{
+					new: command,
+					clean: () => setCommand("")
+				}}
+			/>
 		</section>
-		<section className="flex">
-			<div>
-				<span>user@webSite: ~$</span>
-				<input type="text"/>
-				<span className="animate-ping">|</span>
-			</div>
-		</section>
+		{!processUsed && <section className="flex w-full">
+			<span className="mr-2">{fullPrompt}</span>
+			<input
+				ref={inputRef}
+				type="text"
+				onKeyDown={handleKeyPress}
+				onChange={(e) => setValue(e.target.value)}
+				style={{ width: `${inputWidth}px` }}
+				className="focus:outline-none"
+			/>
+			<span ref={spanRef} className="absolute invisible whitespace-pre font-mono text-base">
+				{value || ""}
+			</span>
+		</section>}
 	</main>
 }
