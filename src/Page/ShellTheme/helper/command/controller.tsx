@@ -9,7 +9,7 @@ export const genericCommand = {
 		"En attente de la feature"
 	],
 	default: [
-		"Commande non reconnu, tapper help ou h"
+		"Commande non reconnue, tapper help ou h"
 	]
 }
 

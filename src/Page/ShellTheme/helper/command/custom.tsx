@@ -2,17 +2,17 @@ import { genericCommand, type CommandDeps } from "./controller"
 
 export const customCommandStr = {
 	title: [
-		"Mode customisation du portfolio powershell"
+		"Mode de customisation du portfolio PowerShell"
 	],
 	help: [
-		"Commande mode customisation:",	
-		"|         Comande             |       raccourci       |  resultat ",
+		"Commandes du mode customisation :",	
+		"|         Commande            |       raccourci       | résultat  ",
 		"------------------------------------------------------------------",
 		"|      user <newPrompt>       |      up  <newPrompt>  | Change le prompt de l'utilisateur",
 		"------------------------------------------------------------------",
 		"|     hostname <newPrompt>    |      hp  <newPrompt>  | Change le prompt du hostname",
 		"------------------------------------------------------------------",
-		"|     symbol <newPrompt>      |      sp  <newPrompt>  | Change le prompt de l'utilisateur",
+		"|     symbol <newPrompt>      |      sp  <newPrompt>  | Change le symbol du prompt",
 		"------------------------------------------------------------------",
 		"|      color <colorHexa>      |       c <colorHexa>   | Change la couleur du text",
 		"------------------------------------------------------------------",
@@ -24,10 +24,10 @@ export const customCommandStr = {
 		"------------------------------------------------------------------"
 	],
 	exit: [
-		"Retour au commande principal"
+		"Retour à la commande principale"
 	],
 	success: [
-		"Modification Ok"
+		"Modification effectuée avec succès"
 	]
 }
 

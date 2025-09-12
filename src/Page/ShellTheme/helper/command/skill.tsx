@@ -71,7 +71,7 @@ export const skillCommandStr = {
 	],
 	succes: "Document en cours de lecture",
 	scroll: "<<(1) Page Précédente - (0) exit - Page Suivante (2)>>",
-	info: "Tapper 1 ou 2 pour naviger, 0 pour quitter"
+	info: "Taper 1 ou 2 pour naviguer, 0 pour quitter"
 }
 
 export async function manageSkillCommand(cmd:string, deps: CommandDeps) {

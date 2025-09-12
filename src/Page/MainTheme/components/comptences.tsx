@@ -11,13 +11,13 @@ type CompétencesProps = {
 function formatArray<T>(array: T[]): T[][] {
 	let count = 0
   const newArray: T[][] = []
-  
+
   array.map((value, index) => {
     if(!newArray[count]) newArray[count] = [] // initialisation
     newArray[count].push(value) // ajoute directement la valeur
 		if(index % 2) count++
   })
-  
+
   return newArray
 }
 

@@ -7,14 +7,14 @@ export const mainCommandStr = {
 		"Mode principal du portfolio powershell"
 	],
 	help: [
-		"Commande principal:",
-		"|   Comande   |  raccourci  |  result ",
+		"Commandes principales :",
+		"|   Commande  |  raccourci  |  résultat ",
 		"---------------------------------",
-		"|    clear    |       c     | vide l'écran",
+		"|    clear    |       c     | Vide l’écran",
 		"---------------------------------",
 		"|    skill    |       s     | Affiche les compétences",
 		"---------------------------------",
-		"|   change    |       ch    | Customise le shell",
+		"|   change    |       ch    | Personnalise le shell",
 		"---------------------------------",
 		"|    help     |       h     | Affiche les commandes",
 		"---------------------------------",
