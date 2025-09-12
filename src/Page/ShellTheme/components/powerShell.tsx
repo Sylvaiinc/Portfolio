@@ -1,133 +1,93 @@
 import { useEffect, useState } from "react"
 import { bigMoney, blur, ghost, ruby } from "../../../assets/asciiArt"
-import { customCommand, genericCommand, mainCommand } from "../asset/command"
 import { useShellContext } from "../providers/shellProvider"
+import { mainCommandStr } from "../helper/command/main"
+import { createCommandHandlers } from "../helper/command/controller"
 
-export type PowerShellProps = {
+export interface PowerShellProps {
 	command: {
 		new: string
 		clean: () => void
 	}
 }
 
+export interface PrintProps {
+	ctx: "shell" | "doc"
+	cmd: string | string[]
+}
+
 export default function PowerShell({ command }: PowerShellProps) {
 	const [current, setCurrent] = useState<string>("")
-
 	const { 
-		fullPrompt,
+		content,
 		context,
+		fullPrompt,
+		processUsed,
+		textColor,
 		symbolChange,
 		userChange,
 		hostNameChange,
-		content,
 		usedProcess,
-		processUsed,
 	} = useShellContext()
 
-	const print = async (cmd: string | string[]) => {
+	const print = async (cmd: PrintProps["cmd"], ctx: PrintProps["ctx"] = "shell") => {
 		usedProcess()
+
 		if(typeof cmd === "object") {
 			for(const elem of cmd) {
-				await handleInsertSpan(elem)
+				await handleInsertShell(elem, ctx)
 			}
 		} else {
-			await handleInsertSpan(cmd)
+			await handleInsertShell(cmd, ctx)
 		}
 		usedProcess()
 	}
 
+	const { mainCommand, customCommand, skillCommand } = createCommandHandlers({
+		shell: {
+			clear: content.shell.clear,
+			print: (cmd: PrintProps["cmd"]) => print(cmd, "shell")
+		},
+		docReader: {
+			clear: content.docReader.clear,
+			print: (cmd: PrintProps["cmd"]) => print(cmd, "doc"),
+			exit: content.docReader.exit
+		},
+		context,
+		colorChange: textColor.change,
+		hostNameChange,
+		symbolChange,
+		userChange
+	})
+
 	useEffect(() => {
-		const handleMainCommand = async () => {
-			switch(command.new) {
-				case "help": 
-				case "h":
-					await print(mainCommand.help)
-					break
-				case "about skill":
-				case "as":
-					await print(mainCommand.about)
-					break
-				case "clear":
-				case "c":
-					content.clear()
-					break
-				case "change":
-				case "ch":
-					await print(customCommand.title)
-					await print(customCommand.help)
-					context.change("custom")
-					break
-				default:
-					await print(genericCommand.default)
-			}
-			command.clean()
-		}
-
-		const handleCustomCommand = async () => {
-			switch(command.new) {
-				case "help": 
-				case "h":
-					await print(customCommand.help)
-					break
-				case "clear":
-				case "c":
-					content.clear()
-					break
-				case "exit":
-				case "e":
-					await print(customCommand.exit)
-					context.change("~")
-					break
-				default:
-					if(command.new.startsWith("user") || command.new.startsWith("up")) {
-						const newPrompt = command.new.split(" ")[1] ?? "user"
-						userChange(newPrompt)
-						await print(customCommand.prompt)
-					} else if(command.new.startsWith("hostname") || command.new.startsWith("hp")) {
-						const newPrompt = command.new.split(" ")[1] ?? "website"
-						hostNameChange(newPrompt)
-						await print(customCommand.prompt)
-					} else if(command.new.startsWith("color") || command.new.startsWith("c")) {
-						await print(genericCommand.default)
-					} else if(command.new.startsWith("symbol") || command.new.startsWith("-sy")) {
-						const newSymbol = command.new.split(" ")[1] ?? "$"
-						symbolChange(newSymbol)
-						await print(customCommand.prompt)
-					} else {
-						await print(genericCommand.default)
-					}
-			}
-
-			command.clean()
-		}
-
-		if (command.new && !processUsed) {
-			print(`${fullPrompt} ${command.new}`)
+		if(command.new && !processUsed) {
 			if(context.current === "custom") {
-				handleCustomCommand()
+				content.shell.add(`${fullPrompt} ${command.new}`)
+				customCommand(command.new)
+			} else if(context.current.startsWith("skill")) {
+				skillCommand(command.new)
 			} else {
-				handleMainCommand()
+				content.shell.add(`${fullPrompt} ${command.new}`)
+				mainCommand(command.new)
 			}
+			command.clean()
 		}
 	}, [command.new, processUsed])
 
-	const handleInsertSpan = (text: string, delay: number = 0) => {
-		return new Promise<void>((resolve) => {
-			setCurrent("")
-			const typeChar = (key: number = 0) => {
-				if (key < text.length - 1) {
-					setCurrent((prev) => prev + text[key -1 ])
-					key++
-					setTimeout(() => typeChar(key), delay)
-				} else {
-					content.add(text)
-					setCurrent("")
-					resolve()
-				}
-			}
+	const handleInsertShell = async (text: string, ctx: PrintProps["ctx"], delay: number = 0) => {
+		setCurrent("")
+		for(let char of text) {
+			setCurrent((prev) => prev + char)
+			await new Promise((res) => setTimeout(res, delay))
+		}
 
-			typeChar()
-		})
+		if(ctx === "shell") {
+			content.shell.add(text)
+		} else {
+			content.docReader.add(text)
+		}
+		setCurrent("")
 	}
 
 	const displayMainText = async () => {
@@ -149,15 +109,22 @@ export default function PowerShell({ command }: PowerShellProps) {
 				break
 		}
 		await print(art)
-		await print(mainCommand.help)
+		await print(mainCommandStr.help)
 	}
 
 	useEffect(() => {
-		displayMainText()
+		// todo remove comment
+		// displayMainText()
 	}, [])
 
 	return <>
-		{content.lines.map((text, idx) => <pre className="w-fit" key={idx}>{text}</pre>)}
-		{current && <pre>{current}</pre>}
+		{content.docReader.lines.length === 0 && <div>
+			{content.shell.lines.map((text, idx) => <pre className="w-fit" key={idx}>{text}</pre>)}
+			{current && <pre>{current}</pre>}
+		</div>}
+		{content.docReader.lines.length !== 0 && <div className="flex flex-col w-full items-center">
+			{content.docReader.lines.map((text, idx) => <span className="w-fit" key={idx}>{text}</span>)}
+			{current && <span>{current}</span>}
+		</div>}
 	</>
 }

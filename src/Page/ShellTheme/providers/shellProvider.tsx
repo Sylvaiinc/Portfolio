@@ -1,33 +1,49 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 
-interface ShellContext {
+export interface ShellContextType {
 	context: {
 		current: string,
-		change: (c: string) => void
+		change: (c: ContextType) => void
 	}
 	content: {
-		lines: string[],
-		add: (l: string) => void
-		clear: () => void
+		shell: {
+			lines: string[],
+			add: (l: string) => void
+			clear: () => void
+		},
+		docReader: {
+			lines: string[],
+			add: (l: string) => void
+			clear: () => void,
+			exit: () => void
+		},
+	}
+	fullPrompt: string
+	processUsed: boolean
+	textColor: {
+		current: string
+		change: (c: string) => void
 	}
 	userChange: (p: string) => void
 	symbolChange: (s: string) => void
 	hostNameChange: (h: string) => void
-	fullPrompt: string
 	usedProcess: () => void
-	processUsed: boolean
 }
 
-const ShellContext = createContext<ShellContext| undefined>(undefined)
+const ShellContext = createContext<ShellContextType | undefined>(undefined)
+
+type ContextType = "~" | "custom" | `skill-${number}`
 
 export function ShellProvider({ children }: { children: ReactNode }) {
-	const [context, setContext] = useState("~")
+	const [context, setContext] = useState<ContextType>("~")
 	const [symbol, setSymbol] = useState("$")
-	const [lines, setLines] = useState<string[]>([])
+	const [ShellLines, setShellLines] = useState<string[]>([])
+	const [docReaderLines, setDocReaderLines] = useState<string[]>([])
 	const [user, setUser] = useState("user")
 	const [hostName, setHostName] = useState("webSite")
 	const [fullPrompt, setFullPrompt] = useState("")
 	const [isWriting, setIsWriting] = useState(false)
+	const [textColor, setTextColor] = useState("#05df72")
 
 	useEffect(() => {
 		setFullPrompt(`${user}@${hostName}: ${context}${symbol}`)
@@ -39,9 +55,21 @@ export function ShellProvider({ children }: { children: ReactNode }) {
 			change: setContext,
 		},
 		content: {
-			lines,
-			add: (l) => setLines((prev) => [...prev, l]),
-			clear: () => setLines([])
+			shell: {
+				lines: ShellLines,
+				add: (l) => setShellLines((prev) => [...prev, l]),
+				clear: () => setShellLines([])
+			},
+			docReader: {
+				lines: docReaderLines,
+				add: (l) => setDocReaderLines((prev) => [...prev, l]),
+				clear: () => setDocReaderLines([""]),
+				exit: () => setDocReaderLines([])
+			}
+		},
+		textColor: {
+			change: (s) => setTextColor(s),
+			current: textColor
 		},
 		processUsed: isWriting,
 		usedProcess: () => setIsWriting(prev => !prev),
@@ -56,7 +84,7 @@ export function ShellProvider({ children }: { children: ReactNode }) {
 
 export function useShellContext() {
 	const context = useContext(ShellContext)
-	if (!context) {
+	if(!context) {
 		throw new Error('useShellContext doit être utilisé dans un ShellProvider')
 	}
 	return context

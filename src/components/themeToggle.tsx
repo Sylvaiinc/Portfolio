@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { useHoverAnimation } from "../utils/animation"
 
-export default function	ThemeToggle() {
+export default function ThemeToggle() {
 	const [dark, setDark] = useState(false)
 	const [mounted, setMounted] = useState(false)
 
 	useEffect(() => {
 		const savedTheme = localStorage.getItem("data-theme")
-		if (savedTheme === "luxury") setDark(true)
+		if(savedTheme === "luxury") setDark(true)
 		setMounted(true)
 	}, [])
 
@@ -25,7 +25,7 @@ export default function	ThemeToggle() {
 		}
 	}, [dark])
 
-	if (!mounted) return null 
+	if(!mounted) return null 
 	return <label className="swap swap-rotate" {...useHoverAnimation("animate-spin")}>
 		{/* this hidden checkbox controls the state */}
 		<input type="checkbox" className="theme-controller" checked={dark} onChange={() => setDark(!dark)}/>

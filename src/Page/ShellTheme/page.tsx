@@ -5,6 +5,7 @@ import {
 } from "react"
 import PowerShell from "./components/powerShell"
 import { useShellContext } from "./providers/shellProvider"
+import { typeSound } from "./helper/song/controler"
 
 // todo contours tube catodic
 export default function ShellTheme() {
@@ -14,34 +15,44 @@ export default function ShellTheme() {
   const spanRef = useRef<HTMLSpanElement>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
 
+	const { fullPrompt, processUsed, content, textColor } = useShellContext()
+
 	useEffect(() => {
-    if (spanRef.current) {
+    if(spanRef.current) {
       setInputWidth(spanRef.current.offsetWidth + 2)
     }
   }, [value])
 
 	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === "Enter" && inputRef.current) {
+		if(e.key === "Enter" && inputRef.current) {
 			setCommand(inputRef.current.value)
 			inputRef.current.value = ""
 		}
 	}
 
-	const { fullPrompt, processUsed } = useShellContext()
+	useEffect(() => {
+		inputRef.current?.focus()
+	}, [processUsed])
+
+	useEffect(() => {
+		window.addEventListener('keydown', typeSound)
+    return () => window.removeEventListener('keydown', typeSound)
+  }, [])
 
 	return <main
-		className="flex flex-col w-full overflow-hidden min-h-screen text-green-400 font-mono p-5"
+		className={`flex flex-col w-full scanlines ${content.docReader.lines.length !== 0 ? "justify-between" : ""} overflow-hidden min-h-screen font-mono p-5`}
+		style={{ color: textColor.current }}
 		onClick={() => inputRef.current?.focus()}
 	>
-		<section className="flex flex-col leading-none whitespace-pre font-mono">
+		<div className="flex flex-col leading-none whitespace-pre font-mono">
 			<PowerShell
 				command={{
 					new: command,
 					clean: () => setCommand("")
 				}}
 			/>
-		</section>
-		{!processUsed && <section className="flex w-full">
+		</div>
+		{!processUsed && <div className="flex w-full">
 			<span className="mr-2">{fullPrompt}</span>
 			<input
 				ref={inputRef}
@@ -54,6 +65,6 @@ export default function ShellTheme() {
 			<span ref={spanRef} className="absolute invisible whitespace-pre font-mono text-base">
 				{value || ""}
 			</span>
-		</section>}
+		</div>}
 	</main>
 }

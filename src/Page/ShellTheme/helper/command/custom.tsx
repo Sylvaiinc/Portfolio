@@ -1,37 +1,6 @@
+import { genericCommand, type CommandDeps } from "./controller"
 
-export const genericCommand = {
-	feature: [
-		"En attente de la feature"
-	],
-	default: [
-		"Commande non reconnu, tapper help ou h"
-	]
-}
-
-export const mainCommand = {
-	title: [
-		"Mode customisation du portfolio powershell"
-	],
-	help: [
-		"Commande principal:",
-		"|   Comande   |  raccourci  |  result ",
-		"---------------------------------",
-		"|    clear    |       c     | vide l'écran",
-		"---------------------------------",
-		"| about skill |       as    | Affiche les compétences",
-		"---------------------------------",
-		"|   change    |       ch    | Customise le shell",
-		"---------------------------------",
-		"|    help     |       h     | Affiche les commandes",
-		"---------------------------------",
-
-	],
-	about: [
-		...genericCommand.feature
-	],
-}
-
-export const customCommand = {
+export const customCommandStr = {
 	title: [
 		"Mode customisation du portfolio powershell"
 	],
@@ -57,7 +26,54 @@ export const customCommand = {
 	exit: [
 		"Retour au commande principal"
 	],
-	prompt: [
-		"Modification du prompt Ok"
+	success: [
+		"Modification Ok"
 	]
+}
+
+export async function ManageCustomCommand(cmd: string, deps: CommandDeps) {
+	const [base, arg] = cmd.split(" ")
+  const value = arg ?? ""
+
+	switch(base) {
+		case "help": 
+		case "h":
+			await deps.shell.print(customCommandStr.help)
+			break
+		case "user":
+		case "up":
+			deps.userChange(value || "user")
+			await deps.shell.print(customCommandStr.success)
+			break
+		case "hostname":
+		case "hp":
+			deps.hostNameChange(value || "website")
+			await deps.shell.print(customCommandStr.success)
+			break
+		case "color":
+		case "c":
+			let color = "#05df72"
+			if(arg) {
+				color = arg.startsWith("#") ?  arg : `#${arg}`
+			}
+			deps.colorChange(color)
+			await deps.shell.print(customCommandStr.success)
+			break
+		case "symbol":
+		case "sy":
+			deps.symbolChange(value)
+			await deps.shell.print(customCommandStr.success)
+			break
+		case "clear":
+		case "c":
+			deps.shell.clear()
+			break
+		case "exit":
+		case "e":
+			await deps.shell.print(customCommandStr.exit)
+			deps.context.change("~")
+			break
+		default:
+			await deps.shell.print(genericCommand.default)
+	}
 }

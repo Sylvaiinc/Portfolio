@@ -13,9 +13,9 @@ function formatArray<T>(array: T[]): T[][] {
   const newArray: T[][] = []
   
   array.map((value, index) => {
-    if (!newArray[count]) newArray[count] = [] // initialisation
+    if(!newArray[count]) newArray[count] = [] // initialisation
     newArray[count].push(value) // ajoute directement la valeur
-		if (index % 2) count++
+		if(index % 2) count++
   })
   
   return newArray
