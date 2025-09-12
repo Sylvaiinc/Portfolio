@@ -82,21 +82,21 @@ export default function MainTheme() {
 				<Toggle text={{ yes: "Compétences", no: "Projets"}} checked={checked} setChecked={(bool) => setCheked(bool)}/>
 			</section>
 			{checked && <section className="flex flex-row">
-			<div className="flex flex-col w-full">
-				<div className="flex flex-wrap justify-around">
-					<SkillsComponent title="Frontend Développeur" elem={skills.front}/>
-					<SkillsComponent title="Backend Développeur" elem={skills.back}/>
+				<div className="flex flex-col w-full">
+					<div className="flex flex-wrap justify-around">
+						<SkillsComponent title="Frontend Développeur" elem={skills.front}/>
+						<SkillsComponent title="Backend Développeur" elem={skills.back}/>
+					</div>
+					<div className="flex flex-wrap justify-around">
+						<SkillsComponent title="Base de données" elem={skills.bdd}/>
+						<SkillsComponent title="Dev Ops" elem={skills.devOps}/>
+					</div>
+					<div className="flex flex-wrap justify-around">
+						<SkillsComponent title="Outils / Méthodologies" elem={skills.other}/>
+					</div>
 				</div>
-				<div className="flex flex-wrap justify-around">
-					<SkillsComponent title="Base de données" elem={skills.bdd}/>
-					<SkillsComponent title="Dev Ops" elem={skills.devOps}/>
-				</div>
-				<div className="flex flex-wrap justify-around">
-					<SkillsComponent title="Outils / Méthodologies" elem={skills.other}/>
-				</div>
-			</div>
 			</section>}
-			{!checked && <section className="flex flex-col w-10/12 self-center items-center mt-10">
+			{!checked && <section className="flex flex-col w-full self-center items-center mt-10">
 				<Projects/>
 			</section>}
 			<footer className="flex w-full justify-center my-10">

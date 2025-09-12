@@ -6,6 +6,7 @@ import {
 import PowerShell from "./components/powerShell"
 import { useShellContext } from "./providers/shellProvider"
 import { typeSound } from "./helper/song/controler"
+import "./page.css"
 
 // todo contours tube catodic
 export default function ShellTheme() {

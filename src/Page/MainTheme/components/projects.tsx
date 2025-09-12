@@ -27,7 +27,7 @@ export default function Projects() {
 	const slides = [t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5]
 
 	const [open, setOpen] = useState(false)
-	return <div className="flex w-full justify-center">
+	return <div className="flex w-full justify-between">
 		<dialog id="project_modal" open={open} className="modal w-full">
 			<div className="modal-box w-full min-w-[95vh]">
 				<div className="carousel w-full">
@@ -49,6 +49,18 @@ export default function Projects() {
 				</div>
 			</div>
 		</dialog>
+		<div className="card bg-base-100 w-96 shadow-sm">
+			<figure className="bg-sky-950">
+				<img src={t2yLogo}/>
+			</figure>
+			<div className="card-body">
+				<h2 className="card-title">Truck2You</h2>
+				<p>Site de location de transport B2B</p>
+				<div className="card-actions justify-end">
+					<button className="btn" onClick={()=> setOpen(true)}>Voir</button>
+				</div>
+			</div>
+		</div>
 		<div className="card bg-base-100 w-96 shadow-sm">
 			<figure className="bg-sky-950">
 				<img src={t2yLogo}/>
