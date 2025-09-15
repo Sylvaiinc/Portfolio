@@ -1,22 +1,23 @@
 import { genericCommand, type CommandDeps } from "./controller"
 import { customCommandStr } from "./custom"
+import { projectCommandStr } from "./project"
 import { skillCommandStr } from "./skill"
 
 export const mainCommandStr = {
-	title: [
-		"Mode principal du portfolio powershell"
-	],
+	title: "Mode principal du portfolio powershell",
 	help: [
 		"Commandes principales :",
 		"|   Commande  |  raccourci  |  résultat ",
 		"+-------------+-------------+----------------",
-		"|    clear    |       c     | Vide l’écran",
-		"+-------------+-------------+----------------",
-		"|    skill    |       s     | Affiche les compétences",
-		"+-------------+-------------+----------------",
 		"|   change    |       ch    | Personnalise le shell",
 		"+-------------+-------------+----------------",
+		"|    clear    |       c     | Vide l’écran",
+		"+-------------+-------------+----------------",
 		"|    help     |       h     | Affiche les commandes",
+		"+-------------+-------------+----------------",
+		"|   project   |       p     | Affiche les projets",
+		"+-------------+-------------+----------------",
+		"|    skill    |       s     | Affiche les compétences",
 		"+-------------+-------------+----------------",
 	],
 }
@@ -29,15 +30,23 @@ export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
 		case "skill":
 		case "s":
 			deps.context.change("skill-1")
-			await deps.shell.print(skillCommandStr.succes)
-			await deps.docReader.print(skillCommandStr.title, "doc")
-			await deps.docReader.print(skillCommandStr.info, "doc")
-			await deps.docReader.print(skillCommandStr.page[0], "doc")
-			await deps.docReader.print(skillCommandStr.scroll, "doc")
+			await deps.shell.print(genericCommand.doc)
+			await deps.docReader.print(skillCommandStr.title)
+			await deps.docReader.print(skillCommandStr.info)
+			await deps.docReader.print(skillCommandStr.page[0])
+			await deps.docReader.print(skillCommandStr.scroll)
 			break
 		case "clear":
 		case "c":
 			deps.shell.clear()
+			break
+		case "project":
+		case "p":
+			deps.context.change("project")
+			await deps.shell.print(genericCommand.doc)
+			await deps.docReader.print(projectCommandStr.project.truck2you)
+			await deps.docReader.print(projectCommandStr.project.portfolio)
+			await deps.docReader.print(projectCommandStr.exit)
 			break
 		case "change":
 		case "ch":
@@ -46,6 +55,6 @@ export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
 			break
 		default:
 			deps.addError()
-			await await deps.shell.print(genericCommand.default)
+			await deps.shell.print(genericCommand.default)
 	}
 }

@@ -3,6 +3,7 @@ import { bigMoney, blur, ghost, ruby } from "../../../assets/asciiArt"
 import { useShellContext } from "../providers/shellProvider"
 import { mainCommandStr } from "../helper/command/main"
 import { createCommandHandlers } from "../helper/command/controller"
+import { useNavigate } from "react-router-dom"
 
 export interface PowerShellProps {
 	command: {
@@ -18,6 +19,7 @@ export interface PrintProps {
 }
 
 export default function PowerShell({ command, addError }: PowerShellProps) {
+	const navigate = useNavigate()
 	const [current, setCurrent] = useState<string>("")
 	const { 
 		content,
@@ -33,18 +35,15 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 
 	const print = async (cmd: PrintProps["cmd"], ctx: PrintProps["ctx"] = "shell") => {
 		usedProcess()
-
-		if(typeof cmd === "object") {
-			for(const elem of cmd) {
-				await handleInsertShell(elem, ctx)
-			}
-		} else {
-			await handleInsertShell(cmd, ctx)
+		const cmds = Array.isArray(cmd) ? cmd : [cmd];
+		for (const elem of cmds) {
+			await handleInsertShell(elem, ctx);
 		}
 		usedProcess()
 	}
 
-	const { mainCommand, customCommand, skillCommand } = createCommandHandlers({
+	const { mainCommand, customCommand, skillCommand, projectCommand } = createCommandHandlers({
+		context,
 		shell: {
 			clear: content.shell.clear,
 			print: (cmd: PrintProps["cmd"]) => print(cmd, "shell")
@@ -55,9 +54,9 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 			exit: content.docReader.exit
 		},
 		addError,
-		context,
 		colorChange: textColor.change,
 		hostNameChange,
+		navigate,
 		symbolChange,
 		userChange
 	})
@@ -69,6 +68,8 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 				customCommand(command.new)
 			} else if(context.current.startsWith("skill")) {
 				skillCommand(command.new)
+			} else if(context.current === "project") {
+				projectCommand(command.new)
 			} else {
 				content.shell.add(`${fullPrompt} ${command.new}`)
 				mainCommand(command.new)
@@ -79,37 +80,17 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 
 	const handleInsertShell = async (text: string, ctx: PrintProps["ctx"], delay: number = 0) => {
 		setCurrent("")
-		for(let char of text) {
+		for(const char of text) {
 			setCurrent((prev) => prev + char)
-			await new Promise((res) => setTimeout(res, delay))
+			if (delay > 0) await new Promise((res) => setTimeout(res, delay))
 		}
-
-		if(ctx === "shell") {
-			content.shell.add(text)
-		} else {
-			content.docReader.add(text)
-		}
+		(ctx === "shell" ? content.shell : content.docReader).add(text)
 		setCurrent("")
 	}
 
 	const displayMainText = async () => {
-		const choice = Math.floor(Math.random() * 4) + 1
-		let art: string[] = []
-
-		switch (choice) {
-			case 1:
-				art = bigMoney
-				break
-			case 2:
-				art = blur
-				break
-			case 3:
-				art = ghost
-				break
-			case 4:
-				art = ruby
-				break
-		}
+		const arts = [bigMoney, blur, ghost, ruby];
+		const art = arts[Math.floor(Math.random() * arts.length)]
 		await print(art)
 		await print(mainCommandStr.help)
 	}

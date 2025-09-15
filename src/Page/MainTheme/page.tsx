@@ -69,7 +69,8 @@ export default function MainTheme() {
 				<span>Full Stack developer</span>	
 			</section>
 			<section className="flex flex-row w-3/12 self-center justify-around mt-10">
-				{externalSite.map((elem) => <a 
+				{externalSite.map((elem, index) => <a
+					key={index}
 					target="_blank"
 					href={elem.link}
 					{...useHoverAnimation("animate-spin")}

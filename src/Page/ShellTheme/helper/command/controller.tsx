@@ -1,34 +1,34 @@
+import type { NavigateFunction } from "react-router-dom"
 import type { PrintProps } from "../../components/powerShell"
 import type { ShellContextType } from "../../providers/shellProvider"
 import { ManageCustomCommand } from "./custom"
 import { ManageMainCommand } from "./main"
+import { manageProjectCommand } from "./project"
 import { manageSkillCommand } from "./skill"
 
 export const genericCommand = {
-	feature: [
-		"En attente de la feature"
-	],
-	default: [
-		"Commande non reconnue, tapper help ou h"
-	]
+	feature: "En attente de la feature",
+	default: "Commande non reconnue, tapper help ou h",
+	doc: "Document en cours de lecture",
 }
 
 export interface CommandDeps {
 	shell: {
 		clear: () => void
-		print: (cmd: PrintProps["cmd"], ctx?: PrintProps["ctx"]) => Promise<void>
+		print: (cmd: PrintProps["cmd"]) => Promise<void>
 	},
 	docReader: {
 		clear: () => void
 		exit: () => void
-		print: (cmd: PrintProps["cmd"], ctx?: PrintProps["ctx"]) => Promise<void>
+		print: (cmd: PrintProps["cmd"]) => Promise<void>
 	}, 
 	context: ShellContextType["context"]
 	addError: () => void,
-	userChange: (u: string) => void,
-  hostNameChange: (h: string) => void,
-  symbolChange: (s: string) => void,
 	colorChange: (c: string) => void,
+  hostNameChange: (h: string) => void,
+	navigate: NavigateFunction
+  symbolChange: (s: string) => void,
+	userChange: (u: string) => void,
 }
 
 export const createCommandHandlers = (
@@ -37,7 +37,8 @@ export const createCommandHandlers = (
   const mainCommand = async (cmd: string) => await ManageMainCommand(cmd, deps)
 	const customCommand = async (cmd: string) => await ManageCustomCommand(cmd, deps)
 	const skillCommand = async (cmd: string) => await manageSkillCommand(cmd, deps)
-  return { mainCommand, customCommand, skillCommand }
+	const projectCommand = async (cmd: string) => await manageProjectCommand(cmd, deps)
+  return { mainCommand, customCommand, skillCommand, projectCommand }
 }
 
 

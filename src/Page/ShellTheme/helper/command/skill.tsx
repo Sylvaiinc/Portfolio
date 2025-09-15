@@ -87,14 +87,14 @@ export async function manageSkillCommand(cmd:string, deps: CommandDeps) {
 			deps.context.change(`${base}-${page}`)
 			deps.docReader.clear()
 			await deps.docReader.print(skillCommandStr.page[page - 1])
-			await deps.docReader.print(skillCommandStr.scroll, "doc")
+			await deps.docReader.print(skillCommandStr.scroll)
 			break
 		case "2":
 			page = (Number(page) === skillCommandStr.page.length ? 1 : Number(page) + 1)
 			deps.context.change(`${base}-${page}`)
 			deps.docReader.clear()
 			await deps.docReader.print(skillCommandStr.page[page - 1])
-			await deps.docReader.print(skillCommandStr.scroll, "doc")
+			await deps.docReader.print(skillCommandStr.scroll)
 			break
 		case "0":
 			deps.docReader.exit()

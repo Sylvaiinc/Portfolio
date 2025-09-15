@@ -1,28 +1,7 @@
 import { useState, type JSX } from "react"
 import t2yLogo from "../../../assets/logo_truck2you.png"
-import t2yCaputre1 from "../../../assets/truck2you/1.png"
-import t2yCaputre2 from "../../../assets/truck2you/2.png"
-import t2yCaputre3 from "../../../assets/truck2you/3.png"
-import t2yCaputre4 from "../../../assets/truck2you/4.png"
-import t2yCaputre5 from "../../../assets/truck2you/5.png"
+import { t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5 } from "../../../assets/truck2you/index"
 import { NavLink } from "react-router-dom"
-
-interface CarouselElementProps { 
-	current: string
-	img: string
-	prev: string
-	next: string
-}
-
-function CarouselElement({ current, img, prev, next }: CarouselElementProps ): JSX.Element {
-	return <div id={current} className="carousel-item relative w-full">
-		<img src={img} className="w-full"/>
-		<div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-			<a href={prev} aria-label="Slide précédente" className="btn btn-circle">❮</a>
-			<a href={next} aria-label="Slide suivante" className="btn btn-circle">❯</a>
-		</div>
-	</div>
-}
 
 export default function Projects() {	
 	const slides = [t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5]
@@ -79,6 +58,23 @@ export default function Projects() {
 					<NavLink className="btn" to="/1">Voir</NavLink>
 				</div>
 			</div>
+		</div>
+	</div>
+}
+
+interface CarouselElementProps {
+	current: string
+	img: string
+	prev: string
+	next: string
+}
+
+function CarouselElement({ current, img, prev, next }: CarouselElementProps ): JSX.Element {
+	return <div id={current} className="carousel-item relative w-full">
+		<img src={img} className="w-full"/>
+		<div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+			<a href={prev} aria-label="Slide précédente" className="btn btn-circle">❮</a>
+			<a href={next} aria-label="Slide suivante" className="btn btn-circle">❯</a>
 		</div>
 	</div>
 }
