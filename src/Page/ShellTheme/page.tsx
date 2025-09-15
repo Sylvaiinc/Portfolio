@@ -18,7 +18,7 @@ export default function ShellTheme() {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [errorCounter, setErrorCounter] = useState(0)
 	const [openHelper, setOpenHelper] = useState(false)
-	const { fullPrompt, processUsed, context, content, textColor } = useShellContext()
+	const { fullPrompt, processUsed, content, textColor } = useShellContext()
 
 	useEffect(() => {
     if(spanRef.current) {
