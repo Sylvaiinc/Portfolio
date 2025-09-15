@@ -13,6 +13,8 @@ export const mainCommandStr = {
 		"+-------------+-------------+----------------",
 		"|   career    |       ca    | Affiche les expériences",
 		"+-------------+-------------+----------------",
+		"|   contact   |       co    | Pour prendre contact avec moi",
+		"+-------------+-------------+----------------",
 		"|    clear    |       c     | Vide l’écran",
 		"+-------------+-------------+----------------",
 		"|    help     |       h     | Affiche les commandes",
@@ -57,6 +59,12 @@ export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
 			deps.context.change("custom")
 			await deps.shell.print(customCommandStr.help)
 			break
+		case "contact":
+		case "co":
+			window.open("mailto:sylvaincuomo@gmail.com")
+			break
+		case "career":
+		case "ca":
 		default:
 			deps.addError()
 			await deps.shell.print(genericCommand.default)
