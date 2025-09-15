@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useHoverAnimation } from "../../utils/animation"
 import ThemeToggle from "../../components/themeToggle"
-import monkey from "../../assets/monkey.webp"
+import monkey from "./assets/monkey.webp"
 import Icon, { type IconProps } from "../../components/icon"
 import Toggle from "../../components/toggle"
-import { SkillsComponent, type Skill } from "./components/comptences"
+import { SkillsComponent, type Skill } from "./components/competences"
 import Projects from "./components/projects"
 
 export default function MainTheme() {

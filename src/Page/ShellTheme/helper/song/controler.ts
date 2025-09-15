@@ -1,7 +1,4 @@
-import key1 from "../../asset/key1.mp3"
-import key2 from "../../asset/key2.mp3"
-import key3 from "../../asset/key3.mp3"
-import key4 from "../../asset/key4.mp3"
+import { key1, key2, key3, key4 } from "../../assets/sounds/index"
 
 const sounds = [
 	new Audio(key1),

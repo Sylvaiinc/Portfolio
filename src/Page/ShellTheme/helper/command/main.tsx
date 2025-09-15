@@ -11,6 +11,8 @@ export const mainCommandStr = {
 		"+-------------+-------------+----------------",
 		"|   change    |       ch    | Personnalise le shell",
 		"+-------------+-------------+----------------",
+		"|   career    |       ca    | Affiche les expériences",
+		"+-------------+-------------+----------------",
 		"|    clear    |       c     | Vide l’écran",
 		"+-------------+-------------+----------------",
 		"|    help     |       h     | Affiche les commandes",

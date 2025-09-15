@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { bigMoney, blur, ghost, ruby } from "../../../assets/asciiArt"
+import { bigMoney, blur, ghost, ruby } from "../assets/asciiArt"
 import { useShellContext } from "../providers/shellProvider"
 import { mainCommandStr } from "../helper/command/main"
 import { createCommandHandlers } from "../helper/command/controller"
