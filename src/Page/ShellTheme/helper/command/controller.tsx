@@ -24,6 +24,7 @@ export interface CommandDeps {
 		print: (cmd: PrintProps["cmd"], ctx?: PrintProps["ctx"]) => Promise<void>
 	}, 
 	context: ShellContextType["context"]
+	addError: () => void,
 	userChange: (u: string) => void,
   hostNameChange: (h: string) => void,
   symbolChange: (s: string) => void,

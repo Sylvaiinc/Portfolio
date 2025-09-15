@@ -7,6 +7,8 @@ import PowerShell from "./components/powerShell"
 import { useShellContext } from "./providers/shellProvider"
 import { typeSound } from "./helper/song/controler"
 import "./page.css"
+import { useNavigate } from "react-router-dom"
+import { HelperModal } from "./components/helperModal"
 
 // todo contours tube catodic
 export default function ShellTheme() {
@@ -15,8 +17,10 @@ export default function ShellTheme() {
 	const [inputWidth, setInputWidth] = useState(0)
   const spanRef = useRef<HTMLSpanElement>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
-
+	const [errorCounter, setErrorCounter] = useState(0)
+	const [openHelper, setOpenHelper] = useState(false)
 	const { fullPrompt, processUsed, content, textColor } = useShellContext()
+	const navigate = useNavigate()
 
 	useEffect(() => {
     if(spanRef.current) {
@@ -32,6 +36,14 @@ export default function ShellTheme() {
 	}
 
 	useEffect(() => {
+		if(errorCounter >= 3) {
+			setOpenHelper(true)
+		} else {
+			setOpenHelper(false)
+		}
+	}, [errorCounter])
+
+	useEffect(() => {
 		inputRef.current?.focus()
 	}, [processUsed])
 
@@ -41,7 +53,7 @@ export default function ShellTheme() {
   }, [])
 
 	return <main
-		className={`flex flex-col w-full scanlines ${content.docReader.lines.length !== 0 ? "justify-between" : ""} overflow-hidden min-h-screen font-mono p-5`}
+		className={`flex flex-col w-full scanlines bg-[#1D232A] ${content.docReader.lines.length !== 0 ? "justify-between" : ""} overflow-hidden min-h-screen cursor-default font-mono p-5`}
 		style={{ color: textColor.current }}
 		onClick={() => inputRef.current?.focus()}
 	>
@@ -51,6 +63,7 @@ export default function ShellTheme() {
 					new: command,
 					clean: () => setCommand("")
 				}}
+				addError={() => setErrorCounter(prev => prev >= 0 ? ++prev : -1)}
 			/>
 		</div>
 		{!processUsed && <div className="flex w-full">
@@ -67,5 +80,6 @@ export default function ShellTheme() {
 				{value || ""}
 			</span>
 		</div>}
+		<HelperModal open={openHelper} setErrorCounter={(n) => setErrorCounter(n)}/>
 	</main>
 }

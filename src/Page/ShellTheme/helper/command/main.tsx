@@ -9,15 +9,15 @@ export const mainCommandStr = {
 	help: [
 		"Commandes principales :",
 		"|   Commande  |  raccourci  |  résultat ",
-		"---------------------------------",
+		"+-------------+-------------+----------------",
 		"|    clear    |       c     | Vide l’écran",
-		"---------------------------------",
+		"+-------------+-------------+----------------",
 		"|    skill    |       s     | Affiche les compétences",
-		"---------------------------------",
+		"+-------------+-------------+----------------",
 		"|   change    |       ch    | Personnalise le shell",
-		"---------------------------------",
+		"+-------------+-------------+----------------",
 		"|    help     |       h     | Affiche les commandes",
-		"---------------------------------",
+		"+-------------+-------------+----------------",
 	],
 }
 export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
@@ -45,6 +45,7 @@ export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
 			await deps.shell.print(customCommandStr.help)
 			break
 		default:
+			deps.addError()
 			await await deps.shell.print(genericCommand.default)
 	}
 }

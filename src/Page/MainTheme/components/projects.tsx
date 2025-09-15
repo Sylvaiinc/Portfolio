@@ -5,6 +5,7 @@ import t2yCaputre2 from "../../../assets/truck2you/2.png"
 import t2yCaputre3 from "../../../assets/truck2you/3.png"
 import t2yCaputre4 from "../../../assets/truck2you/4.png"
 import t2yCaputre5 from "../../../assets/truck2you/5.png"
+import { NavLink } from "react-router-dom"
 
 interface CarouselElementProps { 
 	current: string
@@ -63,13 +64,19 @@ export default function Projects() {
 		</div>
 		<div className="card bg-base-100 w-96 shadow-sm">
 			<figure className="bg-sky-950">
-				<img src={t2yLogo}/>
+				<div className="flex flex-col leading-4 text-nowrap text-xs font-mono whitespace-pre text-green-500">
+					<span>{"    ____             __  ____      ___     "}</span>
+					<span>{"   / __ \\____  _____/ /_/ __/___  / (_)___ "}</span>
+					<span>{"  / /_/ / __ \\/ ___/ __/ /_/ __ \\/ / / __ \\"}</span>
+					<span>{" / ____/ /_/ / /  / /_/ __/ /_/ / / / /_/ /"}</span>
+					<span>{"/_/    \\____/_/   \\__/_/  \\____/_/_/\\____/ "}</span>
+				</div>
 			</figure>
 			<div className="card-body">
-				<h2 className="card-title">Truck2You</h2>
-				<p>Site de location de transport B2B</p>
+				<h2 className="card-title">Shell Portfolio</h2>
+				<p>Theme de démonstration</p>
 				<div className="card-actions justify-end">
-					<button className="btn" onClick={()=> setOpen(true)}>Voir</button>
+					<NavLink className="btn" to="/1">Voir</NavLink>
 				</div>
 			</div>
 		</div>

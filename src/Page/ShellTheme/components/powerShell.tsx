@@ -9,6 +9,7 @@ export interface PowerShellProps {
 		new: string
 		clean: () => void
 	}
+	addError: () => void
 }
 
 export interface PrintProps {
@@ -16,7 +17,7 @@ export interface PrintProps {
 	cmd: string | string[]
 }
 
-export default function PowerShell({ command }: PowerShellProps) {
+export default function PowerShell({ command, addError }: PowerShellProps) {
 	const [current, setCurrent] = useState<string>("")
 	const { 
 		content,
@@ -53,6 +54,7 @@ export default function PowerShell({ command }: PowerShellProps) {
 			print: (cmd: PrintProps["cmd"]) => print(cmd, "doc"),
 			exit: content.docReader.exit
 		},
+		addError,
 		context,
 		colorChange: textColor.change,
 		hostNameChange,
