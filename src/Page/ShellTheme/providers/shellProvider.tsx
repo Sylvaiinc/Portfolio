@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 
 export interface ShellContextType {
 	context: {
-		current: string,
+		current: ContextType,
 		change: (c: ContextType) => void
 	}
 	content: {

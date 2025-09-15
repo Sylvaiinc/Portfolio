@@ -1,14 +1,14 @@
-import { useState, type JSX } from "react"
+import { useRef, useState, type JSX } from "react"
 import t2yLogo from "../../../assets/logo_truck2you.png"
 import { t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5 } from "../../../assets/truck2you/index"
 import { NavLink } from "react-router-dom"
 
 export default function Projects() {	
 	const slides = [t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5]
-
+	const modal = useRef<HTMLDialogElement>(null)
 	const [open, setOpen] = useState(false)
 	return <div className="flex w-full justify-between">
-		<dialog id="project_modal" open={open} className="modal w-full">
+		<dialog ref={modal} id="project_modal" open={open} className="modal w-full">
 			<div className="modal-box w-full min-w-[95vh]">
 				<div className="carousel w-full">
 					{slides.map((img, i) => (

@@ -4,6 +4,7 @@ import { useShellContext } from "../providers/shellProvider"
 import { mainCommandStr } from "../helper/command/main"
 import { createCommandHandlers } from "../helper/command/controller"
 import { useNavigate } from "react-router-dom"
+import T2YCarousel from "./t2yCarousel"
 
 export interface PowerShellProps {
 	command: {
@@ -18,9 +19,31 @@ export interface PrintProps {
 	cmd: string | string[]
 }
 
+export type ModalContext = "" | "project"
 export default function PowerShell({ command, addError }: PowerShellProps) {
 	const navigate = useNavigate()
 	const [current, setCurrent] = useState<string>("")
+	const [modalContext, setModalContext] = useState<ModalContext>("")
+	const [modal, setModal] = useState({
+		project: false
+	})
+
+	useEffect(() => {
+		switch(modalContext) {
+			case "project":
+				setModal(prev => ({
+					...prev,
+					project: true,
+				}))
+				break
+			default:
+				setModal(prev => ({
+					...prev,
+					project: false
+				}))
+		}
+	}, [modalContext])
+
 	const { 
 		content,
 		context,
@@ -42,6 +65,16 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 		usedProcess()
 	}
 
+	const handleInsertShell = async (text: string, ctx: PrintProps["ctx"], delay: number = 0) => {
+		setCurrent("")
+		for(const char of text) {
+			setCurrent((prev) => prev + char)
+			if (delay > 0) await new Promise((res) => setTimeout(res, delay))
+		}
+		(ctx === "shell" ? content.shell : content.docReader).add(text)
+		setCurrent("")
+	}
+
 	const { mainCommand, customCommand, skillCommand, projectCommand } = createCommandHandlers({
 		context,
 		shell: {
@@ -55,10 +88,12 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 		},
 		addError,
 		colorChange: textColor.change,
+		modalContextChange: setModalContext,
 		hostNameChange,
 		navigate,
 		symbolChange,
-		userChange
+		userChange,
+		usedProcess: usedProcess
 	})
 
 	useEffect(() => {
@@ -77,16 +112,6 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 			command.clean()
 		}
 	}, [command.new, processUsed])
-
-	const handleInsertShell = async (text: string, ctx: PrintProps["ctx"], delay: number = 0) => {
-		setCurrent("")
-		for(const char of text) {
-			setCurrent((prev) => prev + char)
-			if (delay > 0) await new Promise((res) => setTimeout(res, delay))
-		}
-		(ctx === "shell" ? content.shell : content.docReader).add(text)
-		setCurrent("")
-	}
 
 	const displayMainText = async () => {
 		const arts = [bigMoney, blur, ghost, ruby];
@@ -109,5 +134,6 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 			{content.docReader.lines.map((text, idx) => <span className="w-fit" key={idx}>{text}</span>)}
 			{current && <span>{current}</span>}
 		</div>}
+		<T2YCarousel close={() => { setModalContext(""); usedProcess() }} isOpen={modal.project}/>
 	</>
 }

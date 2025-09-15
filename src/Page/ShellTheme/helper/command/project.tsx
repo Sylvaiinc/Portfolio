@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom"
 import { genericCommand, type CommandDeps } from "./controller"
 
 //https://patorjk.com/software/taag/ slant police
@@ -27,17 +26,22 @@ export const projectCommandStr = {
 			"                                                "
 		] 
 	},
-	exit: "            <<3 quitter le doc>>                "
+	exit: "            <<3 quitter le doc>>                ",
+	breakLine: "------------------------------------------------",
 }
 
 export async function manageProjectCommand(cmd:string, deps: CommandDeps) {
 	switch(cmd) {
 		case "1":
+			deps.modalContextChange("project")
+			deps.usedProcess()
 			break
 		case "2":
 			deps.navigate("/")
 			break
 		case "3":
+			deps.docReader.exit()
+			deps.context.change("~")
 			break
 		default:
 			await deps.shell.print(genericCommand.default)

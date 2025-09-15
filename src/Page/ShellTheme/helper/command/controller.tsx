@@ -1,5 +1,5 @@
 import type { NavigateFunction } from "react-router-dom"
-import type { PrintProps } from "../../components/powerShell"
+import type { ModalContext, PrintProps } from "../../components/powerShell"
 import type { ShellContextType } from "../../providers/shellProvider"
 import { ManageCustomCommand } from "./custom"
 import { ManageMainCommand } from "./main"
@@ -29,6 +29,8 @@ export interface CommandDeps {
 	navigate: NavigateFunction
   symbolChange: (s: string) => void,
 	userChange: (u: string) => void,
+	usedProcess: () => void
+	modalContextChange: (c: ModalContext) => void
 }
 
 export const createCommandHandlers = (

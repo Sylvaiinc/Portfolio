@@ -45,7 +45,9 @@ export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
 			deps.context.change("project")
 			await deps.shell.print(genericCommand.doc)
 			await deps.docReader.print(projectCommandStr.project.truck2you)
+			await deps.docReader.print(projectCommandStr.breakLine)
 			await deps.docReader.print(projectCommandStr.project.portfolio)
+			await deps.docReader.print(projectCommandStr.breakLine)
 			await deps.docReader.print(projectCommandStr.exit)
 			break
 		case "change":

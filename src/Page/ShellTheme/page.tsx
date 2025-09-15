@@ -7,7 +7,6 @@ import PowerShell from "./components/powerShell"
 import { useShellContext } from "./providers/shellProvider"
 import { typeSound } from "./helper/song/controler"
 import "./page.css"
-import { useNavigate } from "react-router-dom"
 import { HelperModal } from "./components/helperModal"
 
 // todo contours tube catodic
@@ -19,8 +18,7 @@ export default function ShellTheme() {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [errorCounter, setErrorCounter] = useState(0)
 	const [openHelper, setOpenHelper] = useState(false)
-	const { fullPrompt, processUsed, content, textColor } = useShellContext()
-	const navigate = useNavigate()
+	const { fullPrompt, processUsed, context, content, textColor } = useShellContext()
 
 	useEffect(() => {
     if(spanRef.current) {
@@ -53,9 +51,11 @@ export default function ShellTheme() {
   }, [])
 
 	return <main
-		className={`flex flex-col w-full scanlines bg-[#1D232A] ${content.docReader.lines.length !== 0 ? "justify-between" : ""} overflow-hidden min-h-screen cursor-default font-mono p-5`}
+		className={`flex flex-col w-full scanlines bg-[#1D232A] ${content.docReader.lines.length !== 0 ? "justify-between" : ""} overflow-hidden min-h-screen ${openHelper ? "cursor-default" : "cursor-none"} font-mono p-5`}
 		style={{ color: textColor.current }}
-		onClick={() => inputRef.current?.focus()}
+		onClick={() => {
+			inputRef.current?.focus()
+		}}
 	>
 		<div className="flex flex-col leading-none whitespace-pre font-mono">
 			<PowerShell
