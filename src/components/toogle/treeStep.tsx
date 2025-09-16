@@ -28,7 +28,7 @@ export default function TreeToggle (props: ToggleProp) {
 				className={`
 					absolute w-1/3 h-10/12 rounded-sm transition-all duration-150 ease-out
 					${props.value === "y" ? "translate-x-[0%] bg-base-300 left-2" : ""}
-					${props.value === "i" ? "translate-x-[100%] bg-base-content left-1" : ""}
+					${props.value === "i" ? "translate-x-[100%] bg-base-content -left-1" : ""}
 					${props.value === "n" ? "translate-x-[200%] bg-base-300 -left-2" : ""}
 				`}
 			/>
