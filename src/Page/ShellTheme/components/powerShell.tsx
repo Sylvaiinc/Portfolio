@@ -65,7 +65,7 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 		usedProcess()
 	}
 
-	const handleInsertShell = async (text: string, ctx: PrintProps["ctx"], delay: number = 0) => {
+	const handleInsertShell = async (text: string, ctx: PrintProps["ctx"], delay: number = 10) => {
 		setCurrent("")
 		for(const char of text) {
 			setCurrent((prev) => prev + char)
@@ -121,8 +121,7 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 	}
 
 	useEffect(() => {
-		// todo remove comment
-		// displayMainText()
+		displayMainText()
 	}, [])
 
 	return <>

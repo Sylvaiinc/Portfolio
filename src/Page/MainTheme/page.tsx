@@ -3,13 +3,15 @@ import { useHoverAnimation } from "../../utils/animation"
 import ThemeToggle from "../../components/themeToggle"
 import monkey from "./assets/monkey.webp"
 import Icon, { type IconProps } from "../../components/icon"
-import Toggle from "../../components/toggle"
+import Toggle from "../../components/toogle/default"
+import TreeToggle, { type TreeToggleValues } from "../../components/toogle/treeStep"
 import { SkillsComponent, type Skill } from "./components/competences"
 import Projects from "./components/projects"
+import Career from "./components/career"
 
 export default function MainTheme() {
 	const [ checked, setCheked] = useState(true)
-
+	const [toggleState, setToggleState] = useState<TreeToggleValues>("i")
 	const skills: {
 		[key: string]: Skill[]
 	} = {
@@ -80,9 +82,13 @@ export default function MainTheme() {
 				</a>)}
 			</section>
 			<section className="flex flex-col w-10/12 self-center items-center mt-10">
-				<Toggle text={{ yes: "Compétences", no: "Projets"}} checked={checked} setChecked={(bool) => setCheked(bool)}/>
+				<TreeToggle
+					label={{ y: "Projets", i: "Compétences", n: "Expériences" }}
+					value={toggleState}
+					setValue={setToggleState}
+				/>
 			</section>
-			{checked && <section className="flex flex-row">
+			{toggleState === "i" && <section className="flex flex-row">
 				<div className="flex flex-col w-full">
 					<div className="flex flex-wrap justify-around">
 						<SkillsComponent title="Frontend Développeur" elem={skills.front}/>
@@ -97,8 +103,11 @@ export default function MainTheme() {
 					</div>
 				</div>
 			</section>}
-			{!checked && <section className="flex flex-col w-full self-center items-center mt-10">
+			{toggleState === "y" && <section className="flex flex-col w-full self-center items-center mt-10">
 				<Projects/>
+			</section>}
+			{toggleState === "n" && <section className="flex flex-col w-full self-center items-center mt-10">
+				<Career/>
 			</section>}
 			<footer className="flex w-full justify-center my-10">
 					<span className="font-semibold text-base-300">

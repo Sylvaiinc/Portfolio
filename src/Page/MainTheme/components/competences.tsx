@@ -10,15 +10,15 @@ type CompétencesProps = {
 
 function formatArray<T>(array: T[]): T[][] {
 	let count = 0
-  const newArray: T[][] = []
+	const newArray: T[][] = []
 
-  array.map((value, index) => {
-    if(!newArray[count]) newArray[count] = [] // initialisation
-    newArray[count].push(value) // ajoute directement la valeur
+	array.map((value, index) => {
+		if(!newArray[count]) newArray[count] = []
+		newArray[count].push(value)
 		if(index % 2) count++
-  })
+	})
 
-  return newArray
+	return newArray
 }
 
 export function SkillsComponent({ title, elem }: CompétencesProps) {

@@ -29,7 +29,7 @@ export default function Projects() {
 				</div>
 			</div>
 		</dialog>
-		<div className="card bg-base-100 w-96 shadow-sm">
+		<div className="card bg-base-100 w-96 shadow-sm dark:border-1">
 			<figure className="bg-sky-950">
 				<img src={t2yLogo}/>
 			</figure>
@@ -41,7 +41,7 @@ export default function Projects() {
 				</div>
 			</div>
 		</div>
-		<div className="card bg-base-100 w-96 shadow-sm">
+		<div className="card bg-base-100 w-96 shadow-sm dark:border-1">
 			<figure className="bg-sky-950">
 				<div className="flex flex-col leading-4 text-nowrap text-xs font-mono whitespace-pre text-green-500">
 					<span>{"    ____             __  ____      ___     "}</span>
