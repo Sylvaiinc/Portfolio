@@ -3,11 +3,11 @@ import {
 	useRef,
 	useState,
 } from "react"
-import PowerShell from "./components/powerShell"
-import { useShellContext } from "./providers/shellProvider"
-import { typeSound } from "./helper/song/controler"
-import "./page.css"
-import { HelperModal } from "./components/helperModal"
+import PowerShell from "@Shell/components/powerShell"
+import { useShellContext } from "@Shell/providers/shellProvider"
+import { typeSound } from "@Shell/helper/song/controler"
+import "@Shell/page.css"
+import { HelperModal } from "@Shell/components/helperModal"
 
 // todo contours tube catodic
 export default function ShellTheme() {

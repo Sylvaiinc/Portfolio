@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import "./App.css"
-import MainTheme from "./Page/MainTheme/page"
-import ShellTheme from "./Page/ShellTheme/page"
-import { ShellProvider } from "./Page/ShellTheme/providers/shellProvider"
+import MainTheme from "@Main/page"
+import ShellTheme from "@Shell/page"
+import { ShellProvider } from "@Shell/providers/shellProvider"
 
 function App() {
 	return <BrowserRouter>

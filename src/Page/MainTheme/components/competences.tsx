@@ -1,5 +1,5 @@
-import type { IconProps } from "../../../components/icon"
-import Icon from "../../../components/icon"
+import type { IconProps } from "@components/icon"
+import Icon from "@components/icon"
 
 export type Skill = { name: string, level: string, icon: IconProps["type"] }
 

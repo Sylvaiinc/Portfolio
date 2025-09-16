@@ -12,7 +12,7 @@ export const customCommandStr = {
 		"+-----------------------------+-----------------------+----------------------",
 		"|     symbol <newPrompt>      |      sp  <newPrompt>  | Change le symbol du prompt",
 		"+-----------------------------+-----------------------+----------------------",
-		"|      color <colorHexa>      |       c <colorHexa>   | Change la couleur du text",
+		"|      color <colorHexa>      |      co <colorHexa>   | Change la couleur du text",
 		"+-----------------------------+-----------------------+----------------------",
 		"|            clear            |           c           | Vide l'écran",
 		"+-----------------------------+-----------------------+----------------------",
@@ -49,7 +49,7 @@ export async function ManageCustomCommand(cmd: string, deps: CommandDeps) {
 			await deps.shell.print(customCommandStr.success)
 			break
 		case "color":
-		case "c":
+		case "co":
 			let color = "#05df72"
 			if(arg) {
 				color = arg.startsWith("#") ?  arg : `#${arg}`

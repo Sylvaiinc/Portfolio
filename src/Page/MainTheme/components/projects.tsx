@@ -1,6 +1,6 @@
 import { useRef, useState, type JSX } from "react"
-import t2yLogo from "../../../assets/logo_truck2you.png"
-import { t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5 } from "../../../assets/truck2you/index"
+import t2yLogo from "@assets/logo_truck2you.png"
+import { t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5 } from "@assets/truck2you"
 import { NavLink } from "react-router-dom"
 
 export default function Projects() {	

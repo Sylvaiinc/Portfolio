@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { useHoverAnimation } from "../../utils/animation"
-import ThemeToggle from "../../components/themeToggle"
-import monkey from "./assets/monkey.webp"
-import Icon, { type IconProps } from "../../components/icon"
-import TreeToggle, { type TreeToggleValues } from "../../components/toogle/treeStep"
-import { SkillsComponent, type Skill } from "./components/competences"
-import Projects from "./components/projects"
-import Career from "./components/career"
+import { useHoverAnimation } from "@utils/animation"
+import ThemeToggle from "@components/themeToggle"
+import monkey from "@Main/assets/monkey.webp"
+import Icon, { type IconProps } from "@components/icon"
+import TreeToggle, { type TreeToggleValues } from "@components/toogle/treeStep"
+import { SkillsComponent, type Skill } from "@Main/components/competences"
+import Projects from "@Main/components/projects"
+import Career from "@Main/components/career"
 
 export default function MainTheme() {
 	const [toggleState, setToggleState] = useState<TreeToggleValues>("i")

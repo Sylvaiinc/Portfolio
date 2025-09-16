@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type JSX } from "react"
-import { t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5 } from "../../../assets/truck2you/index"
+import { t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5 } from "@assets/truck2you/index"
 
 export default function T2YCarousel({ isOpen, close }: ProjectProps) {
 	const slides = [t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5]

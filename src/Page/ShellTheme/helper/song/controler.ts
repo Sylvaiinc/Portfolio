@@ -1,4 +1,4 @@
-import { key1, key2, key3, key4 } from "../../assets/sounds/index"
+import { key1, key2, key3, key4 } from "@Shell/assets/sounds/index"
 
 const sounds = [
 	new Audio(key1),

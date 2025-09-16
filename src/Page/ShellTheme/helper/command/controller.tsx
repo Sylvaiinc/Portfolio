@@ -1,6 +1,6 @@
 import type { NavigateFunction } from "react-router-dom"
-import type { ModalContext, PrintProps } from "../../components/powerShell"
-import type { ShellContextType } from "../../providers/shellProvider"
+import type { ModalContext, PrintProps } from "@Shell/components/powerShell"
+import type { ShellContextType } from "@Shell/providers/shellProvider"
 import { ManageCustomCommand } from "./custom"
 import { ManageMainCommand } from "./main"
 import { manageProjectCommand } from "./project"
