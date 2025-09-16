@@ -4,7 +4,9 @@ export default function Career() {
 		<div className="self-center text-3xl">Professionnel</div>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Truck2You</span>
+			<span className="text-secondary-content dark:text-neutral">Période Novembre 2022 - Avril 2025</span>
 			<span className="text-secondary-content dark:text-neutral">Développeur Full Stack</span>
+
 			<br/>
 			<div className="flex flex-col w-full pl-2">
 				<span>En tant que Responsable technique du développement d’une solution complète de réservation de véhicules de transport.</span>
@@ -23,6 +25,7 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Blueforest</span>
+			<span className="text-secondary-content dark:text-neutral">Période Septembre 2020 - Septembre 2022</span>
 			<span className="text-secondary-content dark:text-neutral">Développeur Full Stack</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
@@ -41,6 +44,7 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Enedis</span>
+			<span className="text-secondary-content dark:text-neutral">Période Septembre 2019 - Septembre 2020</span>
 			<span className="text-secondary-content dark:text-neutral">Développeur Full Stack</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
@@ -59,6 +63,7 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">NOVRH</span>
+			<span className="text-secondary-content dark:text-neutral">Période Septembre 2018 - Août 2019</span>
 			<span className="text-secondary-content dark:text-neutral">Développeur</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
@@ -75,6 +80,7 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">ACSEO</span>
+			<span className="text-secondary-content dark:text-neutral">Période Septembre 2017 - Août 2018</span>
 			<span className="text-secondary-content dark:text-neutral">Développeur web</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
@@ -93,6 +99,7 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Aix-Marseille Université</span>
+			<span className="text-secondary-content dark:text-neutral">Période Avril 2016 - Juin 2016</span>
 			<span className="text-secondary-content dark:text-neutral">Développeur web</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
@@ -113,11 +120,13 @@ export default function Career() {
 		<div className="self-center text-3xl">Formation</div>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Institut G4</span>
+			<span className="text-secondary-content dark:text-neutral">Période Janvier 2017 - Décembre 2020</span>
 			<span className="text-secondary-content dark:text-neutral">Chef de projet système d'information</span>
 		</div>
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">IUT d'Aix Marseille</span>
+			<span className="text-secondary-content dark:text-neutral">Période Janvier 2014 - Décembre 2017</span>
 			<span className="text-secondary-content dark:text-neutral">DUT Informatique</span>
 		</div>
 	</div>
