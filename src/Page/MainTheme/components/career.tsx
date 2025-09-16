@@ -1,6 +1,6 @@
 
 export default function Career() {
-	return <div className="flex flex-col w-full">
+	return <div className="flex flex-col w-11/12 md:w-full">
 		<div className="self-center text-3xl">Professionnel</div>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Truck2You</span>
