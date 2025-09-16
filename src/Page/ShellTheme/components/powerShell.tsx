@@ -5,6 +5,7 @@ import { mainCommandStr } from "../helper/command/main"
 import { createCommandHandlers } from "../helper/command/controller"
 import { useNavigate } from "react-router-dom"
 import T2YCarousel from "./t2yCarousel"
+import Career from "./career"
 
 export interface PowerShellProps {
 	command: {
@@ -57,25 +58,30 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 	} = useShellContext()
 
 	const print = async (cmd: PrintProps["cmd"], ctx: PrintProps["ctx"] = "shell") => {
-		usedProcess()
+		if(!processUsed) usedProcess()
 		const cmds = Array.isArray(cmd) ? cmd : [cmd];
 		for (const elem of cmds) {
 			await handleInsertShell(elem, ctx);
 		}
-		usedProcess()
+		if(!processUsed) usedProcess()
 	}
 
 	const handleInsertShell = async (text: string, ctx: PrintProps["ctx"], delay: number = 10) => {
 		setCurrent("")
 		for(const char of text) {
 			setCurrent((prev) => prev + char)
-			if (delay > 0) await new Promise((res) => setTimeout(res, delay))
+			if(delay > 0) await new Promise((res) => setTimeout(res, delay))
 		}
 		(ctx === "shell" ? content.shell : content.docReader).add(text)
 		setCurrent("")
+		window.scrollTo({
+			top: document.getElementById("shell-container")?.scrollHeight,
+			left: 0,
+			behavior: "smooth"
+		})
 	}
 
-	const { mainCommand, customCommand, skillCommand, projectCommand } = createCommandHandlers({
+	const { mainCommand, customCommand, skillCommand, projectCommand,  } = createCommandHandlers({
 		context,
 		shell: {
 			clear: content.shell.clear,
@@ -124,8 +130,17 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 		displayMainText()
 	}, [])
 
+	useEffect(() => {
+		window.scrollTo({
+			top: document.getElementById("shell-container")?.scrollHeight,
+			left: 0,
+			behavior: "instant"
+		})
+	}, [context.current])
+
 	return <>
-		{content.docReader.lines.length === 0 && <div>
+		<T2YCarousel close={() => { setModalContext(""); usedProcess() }} isOpen={modal.project}/>
+		{context.current !== "career" && content.docReader.lines.length === 0 && <div>
 			{content.shell.lines.map((text, idx) => <pre className="w-fit" key={idx}>{text}</pre>)}
 			{current && <pre>{current}</pre>}
 		</div>}
@@ -133,6 +148,12 @@ export default function PowerShell({ command, addError }: PowerShellProps) {
 			{content.docReader.lines.map((text, idx) => <span className="w-fit" key={idx}>{text}</span>)}
 			{current && <span>{current}</span>}
 		</div>}
-		<T2YCarousel close={() => { setModalContext(""); usedProcess() }} isOpen={modal.project}/>
+		{context.current === "career" && <Career
+			print={(cmd) => print(cmd, "doc")}
+			close={() => {
+				content.docReader.clear()
+				context.change("~")
+			}}
+		/>}
 	</>
 }

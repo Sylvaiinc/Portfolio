@@ -23,6 +23,8 @@ export const mainCommandStr = {
 		"+-------------+-------------+----------------",
 		"|    skill    |       s     | Affiche les compétences",
 		"+-------------+-------------+----------------",
+		"|    exit     |       e     | Retourne au theme principal",
+		"+-------------+-------------+----------------",
 	],
 }
 export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
@@ -65,6 +67,14 @@ export async function ManageMainCommand(cmd: string, deps: CommandDeps) {
 			break
 		case "career":
 		case "ca":
+			deps.context.change("career")
+			deps.usedProcess()
+			await deps.shell.print(genericCommand.doc)
+			break
+		case "exit":
+		case "e":
+			deps.navigate("/")
+			break
 		default:
 			deps.addError()
 			await deps.shell.print(genericCommand.default)

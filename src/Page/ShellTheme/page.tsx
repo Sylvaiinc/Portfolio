@@ -51,6 +51,7 @@ export default function ShellTheme() {
   }, [])
 
 	return <main
+		id="shell-container"
 		className={`flex flex-col w-full scanlines bg-[#1D232A] ${content.docReader.lines.length !== 0 ? "justify-between" : ""} overflow-hidden min-h-screen ${openHelper ? "cursor-default" : "cursor-none"} font-mono p-5`}
 		style={{ color: textColor.current }}
 		onClick={() => {

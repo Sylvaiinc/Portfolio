@@ -32,7 +32,7 @@ export interface ShellContextType {
 
 const ShellContext = createContext<ShellContextType | undefined>(undefined)
 
-export type ContextType = "~" | "custom" | `skill-${number}` | "project"
+export type ContextType = "~" | "custom" | `skill-${number}` | "project" | "career"
 
 export function ShellProvider({ children }: { children: ReactNode }) {
 	const [context, setContext] = useState<ContextType>("~")
