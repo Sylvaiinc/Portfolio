@@ -68,7 +68,7 @@ export default function MainTheme() {
 				<h1 className="text-3xl font-extrabold font-[Moirai_One]">Sylvain Cuomo</h1>
 				<span>Full Stack developer</span>	
 			</section>
-			<section className="flex flex-row w-3/12 self-center justify-around mt-10">
+			<section className="flex flex-row w-6/12 md:w-3/12 self-center justify-around mt-10">
 				{externalSite.map((elem, index) => <a
 					key={index}
 					target="_blank"

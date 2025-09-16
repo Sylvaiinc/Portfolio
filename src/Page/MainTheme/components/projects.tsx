@@ -7,7 +7,7 @@ export default function Projects() {
 	const slides = [t2yCaputre1, t2yCaputre2, t2yCaputre3, t2yCaputre4, t2yCaputre5]
 	const modal = useRef<HTMLDialogElement>(null)
 	const [open, setOpen] = useState(false)
-	return <div className="flex w-full justify-between">
+	return <div className="flex flex-wrap w-11/12 md:w-full justify-center md:justify-between">
 		<dialog ref={modal} id="project_modal" open={open} className="modal w-full">
 			<div className="modal-box w-full min-w-[95vh]">
 				<div className="carousel w-full">
@@ -41,7 +41,7 @@ export default function Projects() {
 				</div>
 			</div>
 		</div>
-		<div className="card bg-base-100 w-96 shadow-sm dark:border-1">
+		<div className="card mt-5 md:p-0 bg-base-100 w-96 shadow-sm dark:border-1">
 			<figure className="bg-sky-950">
 				<div className="flex flex-col leading-4 text-nowrap text-xs font-mono whitespace-pre text-green-500">
 					<span>{"    ____             __  ____      ___     "}</span>
