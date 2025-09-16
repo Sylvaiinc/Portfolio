@@ -3,14 +3,12 @@ import { useHoverAnimation } from "../../utils/animation"
 import ThemeToggle from "../../components/themeToggle"
 import monkey from "./assets/monkey.webp"
 import Icon, { type IconProps } from "../../components/icon"
-import Toggle from "../../components/toogle/default"
 import TreeToggle, { type TreeToggleValues } from "../../components/toogle/treeStep"
 import { SkillsComponent, type Skill } from "./components/competences"
 import Projects from "./components/projects"
 import Career from "./components/career"
 
 export default function MainTheme() {
-	const [ checked, setCheked] = useState(true)
 	const [toggleState, setToggleState] = useState<TreeToggleValues>("i")
 	const skills: {
 		[key: string]: Skill[]
