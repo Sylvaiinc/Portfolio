@@ -5,7 +5,7 @@ import ShellTheme from "@Shell/page"
 import { ShellProvider } from "@Shell/providers/shellProvider"
 
 function App() {
-	return <BrowserRouter>
+	return <BrowserRouter basename="/Portfolio">
 		<Routes>
 			<Route path="/" element={<MainTheme/>}/>
 			<Route path="/1" element={<ShellProvider>
