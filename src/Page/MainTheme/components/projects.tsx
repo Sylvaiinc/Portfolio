@@ -9,7 +9,7 @@ export default function Projects() {
 	const [open, setOpen] = useState(false)
 	return <div className="flex flex-wrap w-11/12 md:w-full justify-center md:justify-between">
 		<dialog ref={modal} id="project_modal" open={open} className="modal w-full">
-			<div className="modal-box w-full min-w-[95vh]">
+			<div className="modal-box w-11/12 md:w-full min-w-auto md:min-w-[95vh] p-2">
 				<div className="carousel w-full">
 					{slides.map((img, i) => (
 						<CarouselElement
@@ -21,10 +21,10 @@ export default function Projects() {
 						/>
 					))}
 				</div>
-				<div className="modal-action">
+				<div className="modal-action mt-2">
 					<form method="dialog">
 						{/* if there is a button in form, it will close the modal */}
-						<button className="btn" onClick={() => setOpen(false)}>Close</button>
+						<button className="btn btn-sm md:btn" onClick={() => setOpen(false)}>Close</button>
 					</form>
 				</div>
 			</div>
@@ -72,9 +72,9 @@ interface CarouselElementProps {
 function CarouselElement({ current, img, prev, next }: CarouselElementProps ): JSX.Element {
 	return <div id={current} className="carousel-item relative w-full">
 		<img src={img} className="w-full"/>
-		<div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-			<a href={prev} aria-label="Slide précédente" className="btn btn-circle">❮</a>
-			<a href={next} aria-label="Slide suivante" className="btn btn-circle">❯</a>
+		<div className="absolute left-1 md:left-5 right-1 md:right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+			<a href={prev} aria-label="Slide précédente" className="btn btn-xs md:btn-lg btn-circle">❮</a>
+			<a href={next} aria-label="Slide suivante" className="btn btn-xs md:btn-lg btn-circle">❯</a>
 		</div>
 	</div>
 }
