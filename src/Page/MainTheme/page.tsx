@@ -108,7 +108,7 @@ export default function MainTheme() {
 				<Career/>
 			</section>}
 			<footer className="flex w-full justify-center my-10">
-					<span className="font-semibold text-base-300">
+					<span className="font-semibold 	text-neutral-content dark:text-neutral-content">
 							&#169; Sylvain Cuomo. All rigths reserved
 					</span>
 			</footer>

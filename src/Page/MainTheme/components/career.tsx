@@ -4,8 +4,8 @@ export default function Career() {
 		<div className="self-center text-3xl">Professionnel</div>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Truck2You</span>
-			<span className="text-secondary-content dark:text-neutral">Période Novembre 2022 - Avril 2025</span>
-			<span className="text-secondary-content dark:text-neutral">Responsable Technique</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Novembre 2022 - Avril 2025</span>
+			<span className="text-neutral-content dark:text-neutral-content">Responsable Technique</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
 				<ul className="list-outside pl-3.5 *:-indent-2.5">
@@ -23,8 +23,8 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Blueforest</span>
-			<span className="text-secondary-content dark:text-neutral">Période Septembre 2020 - Septembre 2022</span>
-			<span className="text-secondary-content dark:text-neutral">Développeur Full Stack</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Septembre 2020 - Septembre 2022</span>
+			<span className="text-neutral-content dark:text-neutral-content">Développeur Full Stack</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
 				<ul className="list-outside pl-3.5 *:-indent-2.5">
@@ -40,8 +40,8 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Enedis</span>
-			<span className="text-secondary-content dark:text-neutral">Période Septembre 2019 - Septembre 2020</span>
-			<span className="text-secondary-content dark:text-neutral">Développeur Full Stack</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Septembre 2019 - Septembre 2020</span>
+			<span className="text-neutral-content dark:text-neutral-content">Développeur Full Stack</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
 				<ul className="list-outside pl-3.5 *:-indent-2.5">
@@ -57,8 +57,8 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">NOVRH</span>
-			<span className="text-secondary-content dark:text-neutral">Période Septembre 2018 - Août 2019</span>
-			<span className="text-secondary-content dark:text-neutral">Développeur TMA</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Septembre 2018 - Août 2019</span>
+			<span className="text-neutral-content dark:text-neutral-content">Développeur TMA</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
 				<ul className="list-outside pl-3.5 *:-indent-2.5">
@@ -72,8 +72,8 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">ACSEO</span>
-			<span className="text-secondary-content dark:text-neutral">Période Septembre 2017 - Août 2018</span>
-			<span className="text-secondary-content dark:text-neutral">Développeur web</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Septembre 2017 - Août 2018</span>
+			<span className="text-neutral-content dark:text-neutral-content">Développeur web</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
 				<ul className="list-outside pl-3.5 *:-indent-2.5">
@@ -88,8 +88,8 @@ export default function Career() {
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Aix-Marseille Université</span>
-			<span className="text-secondary-content dark:text-neutral">Période Avril 2016 - Juin 2016</span>
-			<span className="text-secondary-content dark:text-neutral">Stage Freelance</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Avril 2016 - Juin 2016</span>
+			<span className="text-neutral-content dark:text-neutral-content">Stage Freelance</span>
 			<br/>
 			<div className="flex flex-col w-full pl-2">
 				<ul className="list-outside pl-3.5 *:-indent-2.5">
@@ -107,14 +107,14 @@ export default function Career() {
 		<div className="self-center text-3xl">Formation</div>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">Institut G4</span>
-			<span className="text-secondary-content dark:text-neutral">Période Janvier 2017 - Décembre 2020</span>
-			<span className="text-secondary-content dark:text-neutral">Chef de projet système d'information</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Janvier 2017 - Décembre 2020</span>
+			<span className="text-neutral-content dark:text-neutral-content">Chef de projet système d'information</span>
 		</div>
 		<div className="divider"/>
 		<div className="flex flex-col w-full">
 			<span className="text-xl">IUT d'Aix Marseille</span>
-			<span className="text-secondary-content dark:text-neutral">Période Janvier 2014 - Décembre 2017</span>
-			<span className="text-secondary-content dark:text-neutral">DUT Informatique</span>
+			<span className="text-neutral-content dark:text-neutral-content">Période Janvier 2014 - Décembre 2017</span>
+			<span className="text-neutral-content dark:text-neutral-content">DUT Informatique</span>
 		</div>
 	</div>
 }

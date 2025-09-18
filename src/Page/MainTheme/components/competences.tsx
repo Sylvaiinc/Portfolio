@@ -37,7 +37,7 @@ export function SkillsComponent({ title, elem }: CompétencesProps) {
 								</div>
 								<div className="flex flex-col col-span-1">
 									<span className="leading-none font-semibold">{skill.name}</span>
-									<span>{skill.level}</span>
+									<span className="text-neutral-content dark:text-neutral-content">{skill.level}</span>
 								</div>
 							</div>
 						})}
